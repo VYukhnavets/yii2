@@ -59,7 +59,7 @@ class m141203_123218_init_db extends Migration
 
     public function down()
     {
-        echo "Emtpty revert. No changes were made\n";
+        echo "Empty revert. No changes were made\n";
 
         return true;
     }
