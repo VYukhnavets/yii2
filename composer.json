@@ -34,10 +34,10 @@
             "yii\\composer\\Installer::postCreateProject"
         ],
         "post-install-cmd":[
-            "app\\commands\\ComposerPostactionsController::postInstall"
+            "app\\commands\\ComposerPostactions::postInstall"
         ],
         "post-update-cmd":[
-            "app\\commands\\ComposerPostactionsController::postUpdate"
+            "app\\commands\\ComposerPostactions::postUpdate"
         ]
     },
     "extra": {
