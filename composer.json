@@ -32,6 +32,12 @@
     "scripts": {
         "post-create-project-cmd": [
             "yii\\composer\\Installer::postCreateProject"
+        ],
+        "post-install-cmd":[
+            "app\\commands\\ComposerPostactionsController::postInstall"
+        ],
+        "post-update-cmd":[
+            "app\\commands\\ComposerPostactionsController::postUpdate"
         ]
     },
     "extra": {
@@ -50,6 +56,11 @@
         "asset-installer-paths": {
             "npm-asset-library": "vendor/npm",
             "bower-asset-library": "vendor/bower"
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "app\\commands\\": "commands/"
         }
     }
 }
