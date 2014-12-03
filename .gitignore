@@ -28,3 +28,6 @@ phpunit.phar
 
 # config dir
 /config
+
+#index.php file
+/web/index.php
