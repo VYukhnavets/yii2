@@ -7,7 +7,7 @@ class m141203_135820_add_more_tables extends Migration
 {
     public function up()
     {
-        $this->db->createCommand('CREATE TABLE IF NOT EXISTS `tbl_application` (
+        $this->db->createCommand('CREATE TABLE IF NOT EXISTS {{%application}} (
             `id` INT(11) UNSIGNED NOT NULL,
             `name` VARCHAR(45) NOT NULL,
             `status` TINYINT(1) UNSIGNED NOT NULL DEFAULT 0,
@@ -15,7 +15,7 @@ class m141203_135820_add_more_tables extends Migration
             PRIMARY KEY (`id`))
           ENGINE = InnoDB;')->execute();
 
-        $this->db->createCommand('CREATE TABLE IF NOT EXISTS `tbl_application_settings` (
+        $this->db->createCommand('CREATE TABLE IF NOT EXISTS {{%application_settings}} (
             `id` INT(11) UNSIGNED NOT NULL AUTO_INCREMENT,
             `app_id` INT(11) UNSIGNED NOT NULL,
             `key` VARCHAR(255) NOT NULL,
@@ -23,12 +23,12 @@ class m141203_135820_add_more_tables extends Migration
             PRIMARY KEY (`id`),
             CONSTRAINT `app_id_settings_key`
               FOREIGN KEY (`app_id`)
-              REFERENCES `tbl_application` (`id`)
+              REFERENCES {{%application}} (`id`)
               ON DELETE CASCADE
               ON UPDATE NO ACTION)
           ENGINE = InnoDB;')->execute();
 
-        $this->db->createCommand('CREATE TABLE IF NOT EXISTS `tbl_application_module` (
+        $this->db->createCommand('CREATE TABLE IF NOT EXISTS {{%application_module}} (
             `app_id` INT(11) UNSIGNED NOT NULL,
             `call_center` TINYINT(1) UNSIGNED NOT NULL DEFAULT 0,
             `call_center_admin` TINYINT(1) UNSIGNED NOT NULL DEFAULT 0,
@@ -47,12 +47,12 @@ class m141203_135820_add_more_tables extends Migration
             PRIMARY KEY (`app_id`),
             CONSTRAINT `fk_tbl_application_module_tbl_application1`
               FOREIGN KEY (`app_id`)
-              REFERENCES `tbl_application` (`id`)
+              REFERENCES {{%application}} (`id`)
               ON DELETE NO ACTION
               ON UPDATE NO ACTION)
           ENGINE = InnoDB;')->execute();
 
-        $this->db->createCommand('CREATE TABLE IF NOT EXISTS `tbl_cs_employees` (
+        $this->db->createCommand('CREATE TABLE IF NOT EXISTS {{%cs_employees}} (
             `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
             `username` VARCHAR(255) NOT NULL,
             `status` TINYINT(1) UNSIGNED NOT NULL DEFAULT 1,
@@ -66,7 +66,7 @@ class m141203_135820_add_more_tables extends Migration
             PRIMARY KEY (`id`))
           ENGINE = InnoDB;')->execute();
 
-        $this->db->createCommand('CREATE TABLE IF NOT EXISTS `tbl_logger` (
+        $this->db->createCommand('CREATE TABLE IF NOT EXISTS {{%logger}} (
             `id` INT(11) UNSIGNED NOT NULL,
             `level` VARCHAR(128) NOT NULL,
             `category` VARCHAR(128) NOT NULL,
@@ -75,7 +75,7 @@ class m141203_135820_add_more_tables extends Migration
             PRIMARY KEY (`id`))
           ENGINE = InnoDB;')->execute();
 
-        $this->db->createCommand('CREATE TABLE IF NOT EXISTS `tbl_help` (
+        $this->db->createCommand('CREATE TABLE IF NOT EXISTS {{%help}} (
             `id` INT(11) UNSIGNED NOT NULL AUTO_INCREMENT,
             `alias` VARCHAR(255) NOT NULL,
             `title` VARCHAR(255) NOT NULL,
@@ -87,7 +87,7 @@ class m141203_135820_add_more_tables extends Migration
             UNIQUE INDEX `alias_UNIQUE` (`alias` ASC))
           ENGINE = InnoDB;')->execute();
 
-        $this->db->createCommand('CREATE TABLE IF NOT EXISTS `tbl_merchant_users` (
+        $this->db->createCommand('CREATE TABLE IF NOT EXISTS {{%merchant_users}} (
             `id` INT(11) UNSIGNED NOT NULL AUTO_INCREMENT,
             `app_id` INT(11) UNSIGNED NOT NULL,
             `first_name` VARCHAR(50) NOT NULL,
@@ -104,12 +104,12 @@ class m141203_135820_add_more_tables extends Migration
             INDEX `app_id_musers_key_idx` (`app_id` ASC),
             CONSTRAINT `app_id_musers_key`
               FOREIGN KEY (`app_id`)
-              REFERENCES `tbl_application` (`id`)
+              REFERENCES {{%application}} (`id`)
               ON DELETE CASCADE
               ON UPDATE NO ACTION)
           ENGINE = InnoDB;')->execute();
 
-        $this->db->createCommand('CREATE TABLE IF NOT EXISTS `tbl_cs_messages` (
+        $this->db->createCommand('CREATE TABLE IF NOT EXISTS {{%cs_messages}} (
             `id` INT(11) UNSIGNED NOT NULL,
             `app_id` INT(11) UNSIGNED NOT NULL,
             `message` TEXT NULL,
@@ -118,20 +118,20 @@ class m141203_135820_add_more_tables extends Migration
             INDEX `app_id_messages_key_idx` (`app_id` ASC),
             CONSTRAINT `app_id_messages_key`
               FOREIGN KEY (`app_id`)
-              REFERENCES `tbl_application` (`id`)
+              REFERENCES {{%application}} (`id`)
               ON DELETE CASCADE
               ON UPDATE NO ACTION)
           ENGINE = InnoDB;')->execute();
 
 
-        $this->db->createCommand('CREATE TABLE IF NOT EXISTS `tbl_state` (
+        $this->db->createCommand('CREATE TABLE IF NOT EXISTS {{%state}} (
             `id` TINYINT(3) UNSIGNED NOT NULL,
             `code` VARCHAR(2) NOT NULL,
             `name` VARCHAR(45) NULL,
             PRIMARY KEY (`id`))
           ENGINE = InnoDB;')->execute();
 
-        $this->db->createCommand('CREATE TABLE IF NOT EXISTS `tbl_application_profile` (
+        $this->db->createCommand('CREATE TABLE IF NOT EXISTS {{%application_profile}} (
             `app_id` INT(11) UNSIGNED NOT NULL,
             `address_street1` VARCHAR(255) NOT NULL,
             `address_street2` VARCHAR(255) NULL,
@@ -149,17 +149,17 @@ class m141203_135820_add_more_tables extends Migration
             INDEX `state_index_idx` (`state_id` ASC),
             CONSTRAINT `app_id_profile_key`
               FOREIGN KEY (`app_id`)
-              REFERENCES `tbl_application` (`id`)
+              REFERENCES {{%application}} (`id`)
               ON DELETE CASCADE
               ON UPDATE NO ACTION,
             CONSTRAINT `state_index`
               FOREIGN KEY (`state_id`)
-              REFERENCES `tbl_state` (`id`)
+              REFERENCES {{%state}} (`id`)
               ON DELETE NO ACTION
               ON UPDATE NO ACTION)
           ENGINE = InnoDB;')->execute();
 
-        $this->db->createCommand('CREATE TABLE IF NOT EXISTS `tbl_merchant_primary_contact` (
+        $this->db->createCommand('CREATE TABLE IF NOT EXISTS {{%merchant_primary_contact}} (
             `app_id` INT(11) UNSIGNED NOT NULL,
             `first_name` VARCHAR(255) NOT NULL,
             `last_name` VARCHAR(255) NOT NULL,
@@ -169,12 +169,12 @@ class m141203_135820_add_more_tables extends Migration
             PRIMARY KEY (`app_id`),
             CONSTRAINT `app_id_prim_contact_key`
               FOREIGN KEY (`app_id`)
-              REFERENCES `tbl_application` (`id`)
+              REFERENCES {{%application}} (`id`)
               ON DELETE CASCADE
               ON UPDATE NO ACTION)
           ENGINE = InnoDB;')->execute();
 
-        $this->db->createCommand('CREATE TABLE IF NOT EXISTS `tbl_merchant_secondary_contact` (
+        $this->db->createCommand('CREATE TABLE IF NOT EXISTS {{%merchant_secondary_contact}} (
             `app_id` INT(11) UNSIGNED NOT NULL,
             `first_name` VARCHAR(255) NOT NULL,
             `last_name` VARCHAR(255) NOT NULL,
@@ -184,7 +184,7 @@ class m141203_135820_add_more_tables extends Migration
             PRIMARY KEY (`app_id`),
             CONSTRAINT `app_id_prim_contact_key0`
               FOREIGN KEY (`app_id`)
-              REFERENCES `tbl_application` (`id`)
+              REFERENCES {{%application}} (`id`)
               ON DELETE CASCADE
               ON UPDATE NO ACTION)
           ENGINE = InnoDB;')->execute();

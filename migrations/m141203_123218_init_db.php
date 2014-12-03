@@ -7,11 +7,7 @@ class m141203_123218_init_db extends Migration
 {
     public function up()
     {
-        $this->db->createCommand('--
-            -- Table structure for table `tbl_cs_messages`
-            --
-
-            CREATE TABLE IF NOT EXISTS `tbl_cs_messages` (
+        $this->db->createCommand('CREATE TABLE IF NOT EXISTS {{%cs_messages}} (
               `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
               `app_id` int(11) NOT NULL,
               `message` text,
@@ -19,11 +15,7 @@ class m141203_123218_init_db extends Migration
               PRIMARY KEY (`id`)
             ) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;')->execute();
 
-        $this->db->createCommand('--
-            -- Table structure for table `tbl_help`
-            --
-
-            CREATE TABLE IF NOT EXISTS `tbl_help` (
+        $this->db->createCommand('CREATE TABLE IF NOT EXISTS {{%help}} (
               `id` int(11) NOT NULL AUTO_INCREMENT,
               `alias` varchar(255) NOT NULL,
               `title` varchar(255) NOT NULL,
@@ -35,11 +27,7 @@ class m141203_123218_init_db extends Migration
               UNIQUE KEY `alias` (`alias`)
             ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;')->execute();
 
-        $this->db->createCommand('--
-            -- Table structure for table `tbl_merchant_users`
-            --
-
-            CREATE TABLE IF NOT EXISTS `tbl_merchant_users` (
+        $this->db->createCommand('CREATE TABLE IF NOT EXISTS {{%merchant_users}} (
               `id` int(11) NOT NULL AUTO_INCREMENT,
               `app_id` int(11) NOT NULL,
               `first_name` varchar(50) NOT NULL,
