@@ -19,6 +19,8 @@ use Yii;
  * @property integer $lastvisit
  * @property string $sess_id
  * @property string $activation_key
+ *
+ * @property Application $app
  */
 class Users extends \yii\db\ActiveRecord
 {
@@ -61,5 +63,13 @@ class Users extends \yii\db\ActiveRecord
             'sess_id' => 'Sess ID',
             'activation_key' => 'Activation Key',
         ];
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getApp()
+    {
+        return $this->hasOne(Application::className(), ['id' => 'app_id']);
     }
 }

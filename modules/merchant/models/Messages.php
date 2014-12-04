@@ -11,6 +11,8 @@ use Yii;
  * @property integer $app_id
  * @property string $message
  * @property integer $createtime
+ *
+ * @property Application $app
  */
 class Messages extends \yii\db\ActiveRecord
 {
@@ -28,8 +30,8 @@ class Messages extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['app_id', 'createtime'], 'required'],
-            [['app_id', 'createtime'], 'integer'],
+            [['id', 'app_id', 'createtime'], 'required'],
+            [['id', 'app_id', 'createtime'], 'integer'],
             [['message'], 'string']
         ];
     }
@@ -45,5 +47,13 @@ class Messages extends \yii\db\ActiveRecord
             'message' => 'Message',
             'createtime' => 'Createtime',
         ];
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getApp()
+    {
+        return $this->hasOne(Application::className(), ['id' => 'app_id']);
     }
 }
