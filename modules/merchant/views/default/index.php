@@ -1,5 +1,9 @@
+<?php
+$this->title = $app->name.' Dashboard';
+$this->params['breadcrumbs'][] = $this->title;
+?>
 <div class="merchant-default-index">
-    <h1><?= $this->context->action->uniqueId ?></h1>
+    <h1>Dashboard for <?= $app->name ?> application</h1>
     <p>
         This is the view content for action "<?= $this->context->action->id ?>".
         The action belongs to the controller "<?= get_class($this->context) ?>"

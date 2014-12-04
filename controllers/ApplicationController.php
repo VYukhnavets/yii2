@@ -1,22 +1,20 @@
 <?php
 
-namespace app\modules\merchant\controllers;
+namespace app\controllers;
 
 use Yii;
-use app\modules\merchant\models\MerchantUsers;
+use app\models\Application;
 use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\helpers\Url;
 
 /**
- * UsersController implements the CRUD actions for MerchantUsers model.
+ * ApplicationsController implements the CRUD actions for Application model.
  */
-class UsersController extends Controller
+class ApplicationController extends Controller
 {
-    
-    public $layout = 'main';
-    
     public function behaviors()
     {
         return [
@@ -30,13 +28,13 @@ class UsersController extends Controller
     }
 
     /**
-     * Lists all MerchantUsers models.
+     * Lists all Application models.
      * @return mixed
      */
     public function actionIndex()
     {
         $dataProvider = new ActiveDataProvider([
-            'query' => MerchantUsers::find(),
+            'query' => Application::find(),
         ]);
 
         return $this->render('index', [
@@ -45,25 +43,26 @@ class UsersController extends Controller
     }
 
     /**
-     * Displays a single MerchantUsers model.
+     * Displays a single Application model.
      * @param integer $id
      * @return mixed
      */
     public function actionView($id)
     {
+        $this->redirect(Url::toRoute(['/merchant/', 'id' =>$id]));
         return $this->render('view', [
             'model' => $this->findModel($id),
         ]);
     }
 
     /**
-     * Creates a new MerchantUsers model.
+     * Creates a new Application model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new MerchantUsers();
+        $model = new Application();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
@@ -75,7 +74,7 @@ class UsersController extends Controller
     }
 
     /**
-     * Updates an existing MerchantUsers model.
+     * Updates an existing Application model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -94,7 +93,7 @@ class UsersController extends Controller
     }
 
     /**
-     * Deletes an existing MerchantUsers model.
+     * Deletes an existing Application model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -107,15 +106,15 @@ class UsersController extends Controller
     }
 
     /**
-     * Finds the MerchantUsers model based on its primary key value.
+     * Finds the Application model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return MerchantUsers the loaded model
+     * @return Application the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = MerchantUsers::findOne($id)) !== null) {
+        if (($model = Application::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');

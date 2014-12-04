@@ -22,7 +22,7 @@ use Yii;
  *
  * @property Application $app
  */
-class Users extends \yii\db\ActiveRecord
+class MerchantUsers extends \yii\db\ActiveRecord
 {
     /**
      * @inheritdoc

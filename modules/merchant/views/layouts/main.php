@@ -36,7 +36,7 @@ AppAsset::register($this);
                 'options' => ['class' => 'navbar-nav navbar-right'],
                 'items' => [
                     ['label' => 'Home', 'url' => ['/site/index']],
-                    ['label' => 'Merchants', 'url' => ['/application/']],
+                    ['label' => 'Merchants', 'url' => ['/applications/'], 'options'=>['class'=>'active']],
                     ['label' => 'Help', 'url' => ['/help/']],
                     Yii::$app->user->isGuest ?
                         ['label' => 'Login', 'url' => ['/site/login']] :
@@ -52,6 +52,16 @@ AppAsset::register($this);
             <?= Breadcrumbs::widget([
                 'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
             ]) ?>
+            <?php
+                echo Nav::widget([
+                    'options' => ['class' => 'nav nav-pills'],
+                    'items' => [
+                        ['label' => 'Dashboard', 'url' => ['/merchant/']],
+                        ['label' => 'Users', 'url' => ['/merchant/users']],
+                        ['label' => 'Messages', 'url' => ['/merchant/messages']],
+                    ],
+                ]);
+            ?>
             <?= $content ?>
         </div>
     </div>
